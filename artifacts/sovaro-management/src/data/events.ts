@@ -14,6 +14,11 @@ export interface TravelEvent {
   // Flight Centre: the destination region slug from flightcentre.com.au/flights/au/<slug>
   flightRegionSlug: string;
   flightRegionLabel: string;
+  // --- PLACEHOLDER PRICING (mock data for layout preview only) ---
+  // Median nightly accommodation price in the region, AUD.
+  mockMedianAccommodationPrice: number;
+  // Cheapest one-way flight found from each Australian capital city, AUD.
+  mockCheapestFlights: { city: string; code: string; price: number }[];
 }
 
 export const events: TravelEvent[] = [
@@ -28,6 +33,16 @@ export const events: TravelEvent[] = [
     bookingCity: "Mooloolaba, Queensland, Australia",
     flightRegionSlug: "au-qld-brisbane",
     flightRegionLabel: "Brisbane (BNE)",
+    mockMedianAccommodationPrice: 210,
+    mockCheapestFlights: [
+      { city: "Sydney", code: "SYD", price: 189 },
+      { city: "Melbourne", code: "MEL", price: 215 },
+      { city: "Canberra", code: "CBR", price: 195 },
+      { city: "Adelaide", code: "ADL", price: 245 },
+      { city: "Hobart", code: "HBA", price: 265 },
+      { city: "Perth", code: "PER", price: 389 },
+      { city: "Darwin", code: "DRW", price: 410 },
+    ],
   },
 ];
 
