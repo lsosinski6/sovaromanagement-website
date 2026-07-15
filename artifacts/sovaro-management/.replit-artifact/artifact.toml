@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Sovaro Management"
+version = "1.0.0"
+id = "artifacts/sovaro-management"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23016
+
+[services.development]
+run = "pnpm --filter @workspace/sovaro-management run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sovaro-management", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/sovaro-management/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23016"
+BASE_PATH = "/"
