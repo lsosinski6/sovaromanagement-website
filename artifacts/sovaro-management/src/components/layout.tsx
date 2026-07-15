@@ -32,8 +32,8 @@ export default function Layout({ children }: { children: ReactNode }) {
         }`}
       >
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold tracking-[0.2em] uppercase z-50 flex items-center gap-3">
-            SOVARO
+          <Link href="/" className="z-50 flex items-center gap-3">
+            <img src="/brand/logo-wordmark.png" alt="Sovaro" className="h-5 md:h-6 w-auto" />
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
               <span className="text-[10px] font-mono text-primary tracking-widest hidden md:inline-block">SYS.OP</span>
@@ -111,9 +111,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-1 md:col-span-2">
-              <h3 className="text-2xl font-bold tracking-[0.2em] mb-4 flex items-center gap-2">
-                SOVARO
-              </h3>
+              <img src="/brand/logo-full.png" alt="Sovaro Management" className="h-14 w-auto mb-6" />
               <p className="text-muted-foreground font-mono text-sm max-w-sm leading-relaxed">
                 Performance-led travel and logistics management for elite athletes and high-performance individuals.
               </p>
