@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Target, Zap } from "lucide-react";
 import LogoMark from "@/components/logo-mark";
 
 export default function About() {
@@ -53,7 +52,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <Target className="w-8 h-8 text-primary mb-6" />
+            <LogoMark className="h-8 w-auto mb-6" />
             <h2 className="text-2xl font-bold uppercase tracking-tight mb-4">What we do.</h2>
             <p className="text-muted-foreground leading-relaxed text-sm font-light">
               From race-week logistics and training blocks to complex multi-stop schedules, Sovaro delivers calm, structured and reliable support designed around the demands of high-performance sport.
@@ -66,7 +65,7 @@ export default function About() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ delay: 0.2 }}
           >
-            <Zap className="w-8 h-8 text-primary mb-6" />
+            <LogoMark className="h-8 w-auto mb-6" />
             <h2 className="text-2xl font-bold uppercase tracking-tight mb-4">Our standard.</h2>
             <p className="text-muted-foreground leading-relaxed text-sm font-light">
               We operate with one standard: performance first. Every itinerary is built with precision, flexibility and detail. This ensures athletes and teams arrive prepared, recover properly, and move through competition periods with confidence.

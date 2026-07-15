@@ -2,7 +2,6 @@ import { Link, useLocation } from "wouter";
 import { ReactNode, useState, useEffect } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import LogoMark from "./logo-mark";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
@@ -35,10 +34,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="z-50 flex items-center gap-3">
             <img src="/brand/logo-wordmark.png" alt="Sovaro" className="h-5 md:h-6 w-auto" />
-            <div className="flex items-center gap-1.5">
-              <LogoMark className="h-3 w-auto animate-pulse" />
-              <span className="text-[10px] font-mono text-primary tracking-widest hidden md:inline-block">SYS.OP</span>
-            </div>
           </Link>
           
           <nav className="hidden md:flex items-center gap-10 text-xs font-mono tracking-[0.15em]">
@@ -143,7 +138,6 @@ export default function Layout({ children }: { children: ReactNode }) {
           
           <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-muted-foreground uppercase tracking-widest">
             <p>&copy; {new Date().getFullYear()} SOVARO MANAGEMENT. ALL RIGHTS RESERVED.</p>
-            <p className="flex items-center gap-2"><LogoMark className="h-3 w-auto" /> STATUS: OPERATIONAL</p>
           </div>
         </div>
       </footer>
