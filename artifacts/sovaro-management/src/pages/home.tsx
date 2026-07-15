@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, Activity, Clock, ShieldCheck, MapPin } from "lucide-react";
+import { ArrowRight, Activity, Clock, MapPin } from "lucide-react";
+import LogoMark from "@/components/logo-mark";
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
             className="max-w-4xl"
           >
             <div className="font-mono text-primary mb-8 flex items-center gap-3 text-xs tracking-[0.2em] uppercase">
-              <Activity size={14} className="animate-pulse" />
+              <LogoMark className="h-3.5 w-auto animate-pulse" />
               <span>Telemetry: Online // Ready for deployment</span>
             </div>
             
@@ -144,7 +145,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl mx-auto"
           >
-            <ShieldCheck className="w-12 h-12 mx-auto text-primary mb-6" />
+            <LogoMark className="h-10 w-auto mx-auto mb-6" />
             <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight mb-6">Ready to elevate your performance?</h2>
             <p className="text-muted-foreground font-mono text-sm mb-10 leading-relaxed">
               Get in touch to discuss how Sovaro can support your performance through tailored travel, logistics and management solutions.

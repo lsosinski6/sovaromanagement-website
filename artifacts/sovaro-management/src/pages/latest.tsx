@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Activity, ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
+import LogoMark from "@/components/logo-mark";
 
 const articles = [
   {
@@ -99,7 +100,7 @@ export default function Latest() {
           className="mt-24 pt-8 border-t border-border flex items-center justify-between text-muted-foreground font-mono text-xs uppercase tracking-widest"
         >
           <span>End of transmission.</span>
-          <Activity size={14} className="opacity-50" />
+          <LogoMark className="h-3.5 w-auto opacity-50" />
         </motion.div>
 
       </div>

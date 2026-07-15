@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Send, Terminal } from "lucide-react";
+import LogoMark from "@/components/logo-mark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -56,7 +57,7 @@ export default function Contact() {
             <div>
               <span className="block text-foreground mb-1 uppercase tracking-widest">HQ Status</span>
               <span className="text-primary flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                <LogoMark className="h-3 w-auto animate-pulse" />
                 Operational / Accepting inquiries
               </span>
             </div>

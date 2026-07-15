@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Activity } from "lucide-react";
+import LogoMark from "@/components/logo-mark";
 
 export default function NotFound() {
   return (
@@ -13,7 +13,7 @@ export default function NotFound() {
         transition={{ duration: 0.5 }}
         className="relative z-10 flex flex-col items-center"
       >
-        <Activity className="w-16 h-16 text-primary mb-8 animate-pulse" />
+        <LogoMark className="h-16 w-auto mx-auto mb-8 animate-pulse" />
         
         <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-4">
           404 <span className="text-muted">/ Signal Lost</span>

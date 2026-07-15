@@ -61,9 +61,9 @@
   --popover-foreground: 0 0% 98%;
   --popover-border: 0 0% 12%;
   
-  --primary: 15 100% 50%; /* Sharp Orange/Red Accent */
-  --primary-foreground: 0 0% 100%;
-  --primary-border: 15 100% 50%;
+  --primary: 0 0% 82%; /* Steel/Silver Accent */
+  --primary-foreground: 0 0% 8%;
+  --primary-border: 0 0% 82%;
   
   --secondary: 0 0% 15%;
   --secondary-foreground: 0 0% 98%;
@@ -73,9 +73,9 @@
   --muted-foreground: 0 0% 65%;
   --muted-border: 0 0% 18%;
   
-  --accent: 15 100% 50%;
-  --accent-foreground: 0 0% 100%;
-  --accent-border: 15 100% 50%;
+  --accent: 0 0% 82%;
+  --accent-foreground: 0 0% 8%;
+  --accent-border: 0 0% 82%;
   
   --destructive: 0 100% 50%;
   --destructive-foreground: 0 0% 98%;
@@ -83,7 +83,7 @@
   
   --border: 0 0% 12%;
   --input: 0 0% 12%;
-  --ring: 15 100% 50%;
+  --ring: 0 0% 82%;
   --radius: 0rem;
 }
 
@@ -98,9 +98,9 @@
   --popover-foreground: 0 0% 98%;
   --popover-border: 0 0% 12%;
   
-  --primary: 15 100% 50%;
-  --primary-foreground: 0 0% 100%;
-  --primary-border: 15 100% 50%;
+  --primary: 0 0% 82%;
+  --primary-foreground: 0 0% 8%;
+  --primary-border: 0 0% 82%;
   
   --secondary: 0 0% 15%;
   --secondary-foreground: 0 0% 98%;
@@ -110,9 +110,9 @@
   --muted-foreground: 0 0% 65%;
   --muted-border: 0 0% 18%;
   
-  --accent: 15 100% 50%;
-  --accent-foreground: 0 0% 100%;
-  --accent-border: 15 100% 50%;
+  --accent: 0 0% 82%;
+  --accent-foreground: 0 0% 8%;
+  --accent-border: 0 0% 82%;
   
   --destructive: 0 100% 50%;
   --destructive-foreground: 0 0% 98%;
@@ -120,7 +120,7 @@
   
   --border: 0 0% 12%;
   --input: 0 0% 12%;
-  --ring: 15 100% 50%;
+  --ring: 0 0% 82%;
 }
 
 @layer base {

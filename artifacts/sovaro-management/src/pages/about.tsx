@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Activity, Target, Zap } from "lucide-react";
+import { Target, Zap } from "lucide-react";
+import LogoMark from "@/components/logo-mark";
 
 export default function About() {
   return (
@@ -16,7 +17,7 @@ export default function About() {
           className="max-w-3xl mb-24 mt-12"
         >
           <div className="font-mono text-primary text-xs tracking-widest uppercase mb-6 flex items-center gap-2">
-            <Activity size={14} /> The Manual
+            <LogoMark className="h-3.5 w-auto" /> The Manual
           </div>
           <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-[0.9] mb-8">
             About <br/>
