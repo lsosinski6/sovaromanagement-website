@@ -4,6 +4,8 @@ import Home from '@/pages/home';
 import About from '@/pages/about';
 import Latest from '@/pages/latest';
 import Store from '@/pages/store';
+import Events from '@/pages/events';
+import EventDetail from '@/pages/event-detail';
 import Contact from '@/pages/contact';
 import NotFound from '@/pages/not-found';
 import Layout from '@/components/layout';
@@ -18,6 +20,8 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/latest" component={Latest} />
             <Route path="/store" component={Store} />
+            <Route path="/events" component={Events} />
+            <Route path="/events/:slug" component={EventDetail} />
             <Route path="/contact" component={Contact} />
             <Route component={NotFound} />
           </Switch>

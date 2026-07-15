@@ -20,6 +20,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     { href: "/about", label: "ABOUT" },
     { href: "/latest", label: "LATEST" },
     { href: "/store", label: "STORE" },
+    { href: "/events", label: "TRAVEL" },
     { href: "/contact", label: "CONTACT" },
   ];
 
@@ -124,6 +125,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
                 <li><Link href="/latest" className="hover:text-primary transition-colors">Latest</Link></li>
                 <li><Link href="/store" className="hover:text-primary transition-colors">Store</Link></li>
+                <li><Link href="/events" className="hover:text-primary transition-colors">Travel</Link></li>
               </ul>
             </div>
 
