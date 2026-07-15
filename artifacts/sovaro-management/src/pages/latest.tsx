@@ -1,35 +1,24 @@
 import { motion } from "framer-motion";
 import { Activity, ArrowRight, FileText } from "lucide-react";
-import { Link } from "wouter";
 
 const articles = [
-  { 
-    id: "ops-04",
-    date: "10.24.2023", 
-    title: "Marathon Majors: Sub-2 Hour Operations", 
-    blurb: "Managing travel, recovery protocols, and course reconnaissance for a 12-person elite team ahead of the Berlin Marathon.", 
-    image: "/journal-1.jpg" 
-  },
-  { 
-    id: "ops-03",
-    date: "09.12.2023", 
-    title: "World Champs Prep: Logistics", 
-    blurb: "Custom carbon-fiber transport solutions and precise time-zone acclimatization schedules for the triathlon world championships.", 
-    image: "/journal-2.jpg" 
-  },
-  { 
+  {
     id: "ops-02",
-    date: "07.05.2023", 
-    title: "European Track Circuit", 
-    blurb: "7 countries, 14 days, 3 athletes. Flawless execution across complex border movements and consecutive race weekends.", 
-    image: "/journal-3.jpg" 
+    date: "11 May",
+    author: "Lachlan Sosinski",
+    title: "Ballarat Marathon Weekend with SOS Performance & Team NOX",
+    blurb: "SOVARO worked alongside SOS Performance and Team Nox across the Ballarat Marathon weekend, supporting a group of endurance athletes through a structured travel and performance environment. A shakeout run was held on Saturday around Lake Wendouree, with race day producing personal bests from Matt Cameron (2:48:25) and Kyal Atkinson (2:48:33).",
+    image: "/journal-3.jpg",
+    url: "https://sovaromanagement.com/latest/ballarat-marathon-weekend-with-sos-performance-team-nox"
   },
-  { 
+  {
     id: "ops-01",
-    date: "05.18.2023", 
-    title: "Altitude Block: Team Transport", 
-    blurb: "Securing private charters and mountain transit for high-altitude training camps. Complete isolation and provisioning.", 
-    image: "/journal-4.jpg" 
+    date: "20 Mar",
+    author: "Lachlan Sosinski",
+    title: "Sovaro Supports Community Shakeout Run Ahead of Gold Coast T100 Triathlon",
+    blurb: "Sovaro was proud to support a community shakeout run, bringing together the endurance community ahead of the Gold Coast T100 Triathlon. Led by SOS Performance with Team Nox, the 6km loop started and finished at Tallebudgera Surf Club, followed by coffee at Bean Surfing Café.",
+    image: "/journal-1.jpg",
+    url: "https://sovaromanagement.com/latest/sovaro-supports-community-shakeout-run-ahead-of-gold-coast-t100-triathlon"
   }
 ];
 
@@ -62,8 +51,11 @@ export default function Latest() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {articles.map((article, i) => (
-            <motion.div
+            <motion.a
               key={article.id}
+              href={article.url}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -82,7 +74,7 @@ export default function Latest() {
               </div>
               
               <div className="flex flex-col flex-1 border-l-2 border-primary/20 pl-4 group-hover:border-primary transition-colors">
-                <div className="font-mono text-xs text-muted-foreground mb-3">{article.date}</div>
+                <div className="font-mono text-xs text-muted-foreground mb-3">{article.date} — {article.author}</div>
                 <h2 className="text-2xl font-bold uppercase tracking-tight mb-3 group-hover:text-primary transition-colors">
                   {article.title}
                 </h2>
@@ -96,7 +88,7 @@ export default function Latest() {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
         

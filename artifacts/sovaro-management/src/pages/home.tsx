@@ -29,13 +29,13 @@ export default function Home() {
               <span>Telemetry: Online // Ready for deployment</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter leading-[0.9] mb-8">
-              Performance <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/80 to-foreground/30">In Motion.</span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter leading-[0.95] mb-8">
+              Performance-led travel <br className="hidden md:block" /> and management for <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/80 to-foreground/30">high-performance individuals.</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl font-light mb-12 leading-relaxed">
-              The quiet operator behind elite travel. We plan, book, and coordinate every moving part of race-week logistics so your only job is to show up and perform.
+              We take the friction out of travel. We plan, book and coordinate every moving part so you can stay focused on what matters most: performance.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -78,10 +78,10 @@ export default function Home() {
             className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-border pb-12"
           >
             <div>
-              <div className="font-mono text-primary text-xs tracking-widest uppercase mb-4">Core Competencies</div>
-              <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-4">Precision Logistics</h2>
+              <div className="font-mono text-primary text-xs tracking-widest uppercase mb-4">About Sovaro</div>
+              <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-4">Performance first.</h2>
               <p className="text-muted-foreground font-mono text-sm max-w-xl leading-relaxed">
-                Zero friction. Absolute control. We manage the variables so athletes can focus purely on execution and recovery.
+                From race-week logistics and training blocks to complex multi-stop schedules, Sovaro delivers calm, structured and reliable support designed around the demands of high-performance sport.
               </p>
             </div>
             <Link href="/about" className="font-mono text-primary hover:text-primary/80 flex items-center gap-2 uppercase text-xs tracking-widest group">
@@ -93,19 +93,19 @@ export default function Home() {
             {[
               { 
                 title: "Race-Week Logistics", 
-                desc: "End-to-end coordination. Equipment transport, strategic accommodation mapping, and split-second ground timing.", 
+                desc: "Structured, reliable support built around the demands of race week, so athletes can arrive prepared and perform.", 
                 icon: Clock,
                 metric: "001"
               },
               { 
-                title: "Training-Block Travel", 
-                desc: "Extended altitude camps and off-season isolation blocks, fully provisioned, scheduled, and meticulously managed.", 
+                title: "Training Blocks", 
+                desc: "Calm, considered coordination for training blocks, designed so athletes can recover properly and stay focused.", 
                 icon: Activity,
                 metric: "002"
               },
               { 
                 title: "Multi-Stop Schedules", 
-                desc: "Complex routing across time zones for the European track circuit, global championships, and consecutive competition weekends.", 
+                desc: "Complex, multi-stop schedules planned and booked with precision, flexibility and detail from start to finish.", 
                 icon: MapPin,
                 metric: "003"
               }
@@ -145,15 +145,15 @@ export default function Home() {
             className="max-w-2xl mx-auto"
           >
             <ShieldCheck className="w-12 h-12 mx-auto text-primary mb-6" />
-            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight mb-6">Ready to execute.</h2>
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight mb-6">Ready to elevate your performance?</h2>
             <p className="text-muted-foreground font-mono text-sm mb-10 leading-relaxed">
-              Whether it's a marathon major or a multi-month training block, our standard is performance first.
+              Get in touch to discuss how Sovaro can support your performance through tailored travel, logistics and management solutions.
             </p>
             <Link 
               href="/contact" 
               className="inline-flex items-center justify-center text-xs font-mono tracking-[0.2em] transition-colors focus-visible:outline-none h-14 px-10 uppercase bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              Submit Requirements
+              Initiate Contact
             </Link>
           </motion.div>
         </div>
