@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useParams, Link } from "wouter";
-import { Plane, Hotel, ArrowRight, ArrowUpRight, MapPin, Calendar, TrendingDown } from "lucide-react";
+import { Plane, Hotel, ArrowRight, ArrowUpRight, MapPin, Calendar, TrendingDown, Star } from "lucide-react";
 import { getEvent, bookingComUrl, flightCentreUrl } from "@/data/events";
 
 function formatAud(value: number): string {
@@ -10,6 +11,7 @@ function formatAud(value: number): string {
 export default function EventDetail() {
   const params = useParams<{ slug: string }>();
   const event = getEvent(params.slug);
+  const [flightTab, setFlightTab] = useState<"cheapest" | "best">("cheapest");
 
   if (!event) {
     return (
@@ -21,6 +23,10 @@ export default function EventDetail() {
       </div>
     );
   }
+
+  const activeFlights = flightTab === "cheapest"
+    ? [...event.mockCheapestFlights].sort((a, b) => a.price - b.price)
+    : [...event.mockBestFlights].sort((a, b) => a.price - b.price);
 
   return (
     <div className="pt-24 pb-20 w-full relative min-h-screen">
@@ -49,7 +55,7 @@ export default function EventDetail() {
           </p>
         </motion.div>
 
-        {/* Estimated Trip Costs — first content element */}
+        {/* Estimated Trip Costs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -79,41 +85,86 @@ export default function EventDetail() {
               </span>
             </div>
 
-            {/* Cheapest flight per capital city */}
+            {/* Flights panel */}
             <div className="bg-card border border-border p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <Plane className="w-6 h-6 text-primary" />
-                <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                  Cheapest Flight to {event.flightRegionLabel}, by Departure City
-                </span>
+              {/* Panel header + tab toggle */}
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                <div className="flex items-center gap-3">
+                  <Plane className="w-6 h-6 text-primary" />
+                  <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                    Flights to {event.flightRegionLabel}
+                  </span>
+                </div>
+                {/* Cheapest / Best tabs */}
+                <div className="flex border border-border overflow-hidden">
+                  <button
+                    onClick={() => setFlightTab("cheapest")}
+                    className={`flex items-center gap-1.5 px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors ${
+                      flightTab === "cheapest"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-transparent text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    <TrendingDown size={12} />
+                    Cheapest
+                  </button>
+                  <button
+                    onClick={() => setFlightTab("best")}
+                    className={`flex items-center gap-1.5 px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors border-l border-border ${
+                      flightTab === "best"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-transparent text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    <Star size={12} />
+                    Best
+                  </button>
+                </div>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {[...event.mockCheapestFlights]
-                  .sort((a, b) => a.price - b.price)
-                  .map((flight, i) => (
-                    <div
-                      key={flight.code}
-                      className={`flex flex-col justify-between p-4 border ${
-                        i === 0 ? "border-primary bg-primary/5" : "border-border"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                          {flight.city} <span className="text-muted-foreground/60">({flight.code})</span>
-                        </span>
-                        {i === 0 && <TrendingDown size={14} className="text-primary" />}
-                      </div>
-                      <span className={`text-2xl font-bold tracking-tighter ${i === 0 ? "text-primary" : ""}`}>
-                        {formatAud(flight.price)}
+
+              {/* Tab description */}
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70 mb-5">
+                {flightTab === "cheapest"
+                  ? "Lowest one-way fare found from each capital city, by departure."
+                  : "Best-value fare — balanced for price, routing and convenience."}
+              </p>
+
+              {/* Flight grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
+                {activeFlights.map((flight, i) => (
+                  <div
+                    key={flight.code}
+                    className={`flex flex-col justify-between p-4 border ${
+                      i === 0 ? "border-primary bg-primary/5" : "border-border"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                        {flight.city}{" "}
+                        <span className="text-muted-foreground/60">({flight.code})</span>
                       </span>
+                      {i === 0 && (
+                        flightTab === "cheapest"
+                          ? <TrendingDown size={12} className="text-primary shrink-0" />
+                          : <Star size={12} className="text-primary shrink-0" />
+                      )}
                     </div>
-                  ))}
+                    <span className={`text-2xl font-bold tracking-tighter ${i === 0 ? "text-primary" : ""}`}>
+                      ${formatAud(flight.price)}
+                    </span>
+                    {flight.via && (
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 mt-1">
+                        {flight.via}
+                      </span>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Image */}
+        {/* Hero image */}
         <div className="w-full aspect-[21/9] bg-card border border-border relative overflow-hidden mb-16">
           <img src={event.image} alt={event.name} className="w-full h-full object-cover opacity-90" />
         </div>
@@ -142,7 +193,7 @@ export default function EventDetail() {
           </motion.a>
 
           <motion.a
-            href={flightCentreUrl(event.flightRegionSlug)}
+            href={flightCentreUrl(event)}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
