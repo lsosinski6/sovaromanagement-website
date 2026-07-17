@@ -1,0 +1,43 @@
+Here's the full brief to paste directly into Replit:
+
+GLOBAL
+Remove all military style language, branding and graphic elements across the entire website. This includes any references to "Telemetry", "Briefings", "End of Transmission", "OPS 1", "OPS 2", "Initiate Contact" or any similar military themed copy. Replace with clean, warm and professional language throughout.
+HOME PAGE
+
+Remove "TELEMETRY: ONLINE // READY FOR DEPLOYMENT" text
+Remove the stacked logo (keep the standard horizontal logo)
+Keep the background
+Rename button "The Stand" to "Travel Hub" and link to the Travel Hub page
+Rename button "Initiate Contact" to "Contact Us"
+Keep the About page section and update the description to: "Sovaro Management is a performance-led travel and logistics service supporting athletes, high performers and organisations with race travel, training camps, competition logistics and corporate travel management. Operating in partnership with CT Connections, we deliver end-to-end travel solutions including flexible bookings, full spend tracking, 24/7 support and access to a global travel network — so you can focus entirely on performance."
+Remove "Store" from navigation and all links to it
+
+NAVIGATION ORDER
+Reorder the top navigation as follows:
+
+Travel Hub
+Latest
+About
+Contact Us
+Remove Store entirely from navigation.
+
+LATEST PAGE
+
+Rename page heading to "Latest" — remove "Briefings" entirely
+Remove "End of Transmission" at the bottom of articles — delete with no replacement
+Remove "OPS 1" and "OPS 2" tags from all newsletter/article entries
+Host all articles directly on this website so they no longer link to the old website. The old website will be deleted once this is set up.
+
+TRAVEL HUB PAGE
+
+This is the most important page on the website — ensure it is the first navigation link
+Keep the overall design and layout
+On each individual Race Travel Planner page, move "Estimated Trip Costs" to the very top as the first element visitors see
+Move accommodation and flight links below the Estimated Trip Costs section
+
+CONTACT US PAGE
+
+Remove all military style language and branding
+Rename page and all references from "Initiate Contact" to "Contact Us" or "Get in Touch"
+Rewrite all copy in a clean, warm and professional tone consistent with the Sovaro brand
+Keep the form and contact details, just update the surrounding language
