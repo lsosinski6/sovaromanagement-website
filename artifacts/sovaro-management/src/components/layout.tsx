@@ -17,11 +17,10 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, []);
 
   const links = [
-    { href: "/about", label: "ABOUT" },
+    { href: "/events", label: "TRAVEL HUB" },
     { href: "/latest", label: "LATEST" },
-    { href: "/store", label: "STORE" },
-    { href: "/events", label: "TRAVEL" },
-    { href: "/contact", label: "CONTACT" },
+    { href: "/about", label: "ABOUT" },
+    { href: "/contact", label: "CONTACT US" },
   ];
 
   return (
@@ -114,24 +113,23 @@ export default function Layout({ children }: { children: ReactNode }) {
             </div>
             
             <div>
-              <h4 className="font-mono text-primary text-xs tracking-widest mb-6 uppercase">Index</h4>
+              <h4 className="font-mono text-primary text-xs tracking-widest mb-6 uppercase">Pages</h4>
               <ul className="space-y-3 font-mono text-sm text-muted-foreground">
-                <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
+                <li><Link href="/events" className="hover:text-primary transition-colors">Travel Hub</Link></li>
                 <li><Link href="/latest" className="hover:text-primary transition-colors">Latest</Link></li>
-                <li><Link href="/store" className="hover:text-primary transition-colors">Store</Link></li>
-                <li><Link href="/events" className="hover:text-primary transition-colors">Travel</Link></li>
+                <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-mono text-primary text-xs tracking-widest mb-6 uppercase">Comms</h4>
+              <h4 className="font-mono text-primary text-xs tracking-widest mb-6 uppercase">Contact</h4>
               <ul className="space-y-3 font-mono text-sm text-muted-foreground">
                 <li>
                   <a href="mailto:talent@sovaromanagement.com" className="hover:text-primary transition-colors flex items-center gap-1 group">
                     Email <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>
                 </li>
-                <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Form</Link></li>
+                <li><Link href="/contact" className="hover:text-primary transition-colors">Get In Touch</Link></li>
               </ul>
             </div>
           </div>

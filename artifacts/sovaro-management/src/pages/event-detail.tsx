@@ -32,7 +32,7 @@ export default function EventDetail() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mb-16 mt-12"
+          className="max-w-3xl mb-12 mt-12"
         >
           <Link href="/events" className="font-mono text-primary text-xs uppercase tracking-widest hover:text-primary/80 mb-6 inline-block">
             &larr; Travel Hub
@@ -49,62 +49,11 @@ export default function EventDetail() {
           </p>
         </motion.div>
 
-        {/* Image */}
-        <div className="w-full aspect-[21/9] bg-card border border-border relative overflow-hidden mb-16">
-          <img src={event.image} alt={event.name} className="w-full h-full object-cover opacity-90" />
-        </div>
-
-        {/* Travel Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <motion.a
-            href={bookingComUrl(event.bookingCity)}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="group flex flex-col bg-card border border-border hover:border-primary transition-colors duration-300 p-8"
-          >
-            <Hotel className="w-8 h-8 text-primary mb-6" />
-            <h2 className="text-xl font-bold uppercase tracking-tight mb-3 group-hover:text-primary transition-colors">
-              Accommodation
-            </h2>
-            <p className="text-muted-foreground text-sm font-light leading-relaxed mb-8 flex-1">
-              Search stays in {event.location} for race weekend via Booking.com.
-            </p>
-            <span className="font-mono text-xs uppercase tracking-widest flex items-center gap-2 text-foreground group-hover:text-primary transition-colors">
-              Search on Booking.com <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </span>
-          </motion.a>
-
-          <motion.a
-            href={flightCentreUrl(event.flightRegionSlug)}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: 0.1 }}
-            className="group flex flex-col bg-card border border-border hover:border-primary transition-colors duration-300 p-8"
-          >
-            <Plane className="w-8 h-8 text-primary mb-6" />
-            <h2 className="text-xl font-bold uppercase tracking-tight mb-3 group-hover:text-primary transition-colors">
-              Flights
-            </h2>
-            <p className="text-muted-foreground text-sm font-light leading-relaxed mb-8 flex-1">
-              Search flights to {event.flightRegionLabel} via Flight Centre.
-            </p>
-            <span className="font-mono text-xs uppercase tracking-widest flex items-center gap-2 text-foreground group-hover:text-primary transition-colors">
-              Search on Flight Centre <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </span>
-          </motion.a>
-        </div>
-
-        {/* Estimated Trip Costs */}
+        {/* Estimated Trip Costs — first content element */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           className="mb-16"
         >
           <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
@@ -163,6 +112,57 @@ export default function EventDetail() {
             </div>
           </div>
         </motion.div>
+
+        {/* Image */}
+        <div className="w-full aspect-[21/9] bg-card border border-border relative overflow-hidden mb-16">
+          <img src={event.image} alt={event.name} className="w-full h-full object-cover opacity-90" />
+        </div>
+
+        {/* Travel Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <motion.a
+            href={bookingComUrl(event.bookingCity)}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            className="group flex flex-col bg-card border border-border hover:border-primary transition-colors duration-300 p-8"
+          >
+            <Hotel className="w-8 h-8 text-primary mb-6" />
+            <h2 className="text-xl font-bold uppercase tracking-tight mb-3 group-hover:text-primary transition-colors">
+              Accommodation
+            </h2>
+            <p className="text-muted-foreground text-sm font-light leading-relaxed mb-8 flex-1">
+              Search stays in {event.location} for race weekend via Booking.com.
+            </p>
+            <span className="font-mono text-xs uppercase tracking-widest flex items-center gap-2 text-foreground group-hover:text-primary transition-colors">
+              Search on Booking.com <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </span>
+          </motion.a>
+
+          <motion.a
+            href={flightCentreUrl(event.flightRegionSlug)}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: 0.1 }}
+            className="group flex flex-col bg-card border border-border hover:border-primary transition-colors duration-300 p-8"
+          >
+            <Plane className="w-8 h-8 text-primary mb-6" />
+            <h2 className="text-xl font-bold uppercase tracking-tight mb-3 group-hover:text-primary transition-colors">
+              Flights
+            </h2>
+            <p className="text-muted-foreground text-sm font-light leading-relaxed mb-8 flex-1">
+              Search flights to {event.flightRegionLabel} via Flight Centre.
+            </p>
+            <span className="font-mono text-xs uppercase tracking-widest flex items-center gap-2 text-foreground group-hover:text-primary transition-colors">
+              Search on Flight Centre <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </span>
+          </motion.a>
+        </div>
 
         {/* CTA */}
         <motion.div

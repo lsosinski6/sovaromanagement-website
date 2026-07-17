@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Activity, Clock, MapPin } from "lucide-react";
-import LogoMark from "@/components/logo-mark";
 
 export default function Home() {
   return (
@@ -25,11 +24,6 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl"
           >
-            <div className="font-mono text-primary mb-8 flex items-center gap-3 text-xs tracking-[0.2em] uppercase">
-              <LogoMark className="h-3.5 w-auto animate-pulse" />
-              <span>Telemetry: Online // Ready for deployment</span>
-            </div>
-            
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter leading-[0.95] mb-8">
               Performance-led travel <br className="hidden md:block" /> and management for <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/80 to-foreground/30">high-performance individuals.</span>
@@ -41,16 +35,16 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
-                href="/about" 
+                href="/events" 
                 className="inline-flex items-center justify-center text-xs font-mono tracking-[0.2em] transition-colors focus-visible:outline-none h-14 px-8 uppercase bg-primary text-primary-foreground hover:bg-primary/90"
               >
-                The Standard
+                Travel Hub
               </Link>
               <Link 
                 href="/contact" 
                 className="inline-flex items-center justify-center text-xs font-mono tracking-[0.2em] transition-colors focus-visible:outline-none h-14 px-8 uppercase border border-border bg-background/50 backdrop-blur-sm hover:border-primary hover:text-primary text-foreground group"
               >
-                Initiate Contact <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Contact Us <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </motion.div>
@@ -67,7 +61,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Logistics Overview */}
+      {/* About Section */}
       <section className="py-32 bg-background relative border-t border-border">
         <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10">
@@ -82,11 +76,11 @@ export default function Home() {
               <div className="font-mono text-primary text-xs tracking-widest uppercase mb-4">About Sovaro</div>
               <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-4">Performance first.</h2>
               <p className="text-muted-foreground font-mono text-sm max-w-xl leading-relaxed">
-                From race-week logistics and training blocks to complex multi-stop schedules, Sovaro delivers calm, structured and reliable support designed around the demands of high-performance sport.
+                Sovaro Management is a performance-led travel and logistics service supporting athletes, high performers and organisations with race travel, training camps, competition logistics and corporate travel management. Operating in partnership with CT Connections, we deliver end-to-end travel solutions including flexible bookings, full spend tracking, 24/7 support and access to a global travel network — so you can focus entirely on performance.
               </p>
             </div>
             <Link href="/about" className="font-mono text-primary hover:text-primary/80 flex items-center gap-2 uppercase text-xs tracking-widest group">
-              Read The Manual <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              Learn More <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
 
@@ -145,16 +139,15 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl mx-auto"
           >
-            <LogoMark className="h-10 w-auto mx-auto mb-6" />
             <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight mb-6">Ready to elevate your performance?</h2>
             <p className="text-muted-foreground font-mono text-sm mb-10 leading-relaxed">
-              Get in touch to discuss how Sovaro can support your performance through tailored travel, logistics and management solutions.
+              Get in touch to discuss how Sovaro can support you through tailored travel, logistics and management solutions.
             </p>
             <Link 
               href="/contact" 
               className="inline-flex items-center justify-center text-xs font-mono tracking-[0.2em] transition-colors focus-visible:outline-none h-14 px-10 uppercase bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              Initiate Contact
+              Contact Us
             </Link>
           </motion.div>
         </div>
