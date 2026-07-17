@@ -20,11 +20,11 @@ export default function Events() {
             <Plane size={14} /> Travel Hub
           </div>
           <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-[0.9] mb-6">
-            Race-Day <br />
-            <span className="text-muted-foreground">Travel.</span>
+            Race Travel <br />
+            <span className="text-muted-foreground">Planner.</span>
           </h1>
           <p className="text-sm text-muted-foreground font-mono leading-relaxed max-w-xl uppercase tracking-widest">
-            One stop for accommodation and flights for upcoming races we support.
+            The Travel Hub is your one-stop destination for race travel planning. Every race has its own dedicated page giving you an instant snapshot of what your trip will cost — flights, accommodation and key expenses — all in one click. No research, no guesswork. Just clear, accessible travel information built specifically around your race calendar.
           </p>
         </motion.div>
 

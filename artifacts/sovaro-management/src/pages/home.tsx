@@ -76,7 +76,7 @@ export default function Home() {
               <div className="font-mono text-primary text-xs tracking-widest uppercase mb-4">About Sovaro</div>
               <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-4">Performance first.</h2>
               <p className="text-muted-foreground font-mono text-sm max-w-xl leading-relaxed">
-                Sovaro Management is a performance-led travel and logistics service supporting athletes, high performers and organisations with race travel, training camps, competition logistics and corporate travel management. Operating in partnership with CT Connections, we deliver end-to-end travel solutions including flexible bookings, full spend tracking, 24/7 support and access to a global travel network — so you can focus entirely on performance.
+                When you book with Sovaro you get more than just a flight and a hotel. You get flexible bookings with full refund options up to 48 hours before travel, competitive pricing through our global travel network, 24/7 Australian-based support wherever you are in the world, complete spend tracking and budget visibility across every trip, access to over 53,000 properties globally, and a dedicated travel partner who understands performance. No overhead, no guesswork — just travel that works as hard as you do.
               </p>
             </div>
             <Link href="/about" className="font-mono text-primary hover:text-primary/80 flex items-center gap-2 uppercase text-xs tracking-widest group">
@@ -93,8 +93,8 @@ export default function Home() {
                 metric: "001"
               },
               { 
-                title: "Training Blocks", 
-                desc: "Calm, considered coordination for training blocks, designed so athletes can recover properly and stay focused.", 
+                title: "Training Camps & Retreats", 
+                desc: "Performance-focused travel experiences built around training blocks, preparation and recovery. From endurance camps to athlete retreats, we coordinate everything so you arrive ready to perform.", 
                 icon: Activity,
                 metric: "002"
               },
