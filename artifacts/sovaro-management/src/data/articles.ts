@@ -22,7 +22,7 @@ export const articles: Article[] = [
       "Race day delivered. Matt Cameron crossed the line in 2:48:25 and Kyal Atkinson followed in 2:48:33 — personal bests for both athletes. The weekend was a strong demonstration of what's possible when logistics are handled well and athletes can focus entirely on performing.",
       "Sovaro continues to work with SOS Performance and Team Nox across their race calendar. If you're planning race travel and want structured, reliable support, get in touch.",
     ],
-    image: "/journal-3.jpg",
+    image: "/ballarat.png",
   },
   {
     slug: "gold-coast-t100-shakeout-run",
@@ -37,7 +37,7 @@ export const articles: Article[] = [
       "The run wrapped up with coffee at Bean Surfing Café, which set the tone perfectly — relaxed, connected, and ready.",
       "Events like this reflect what Sovaro is about: creating the conditions for athletes to perform at their best, on and off the race course. We're grateful to have been involved and look forward to continuing to support the community through events like these.",
     ],
-    image: "/journal-1.jpg",
+    image: "/nox-run-club.png",
   },
 ];
 

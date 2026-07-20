@@ -35,9 +35,9 @@ export default function About() {
           className="w-full aspect-[21/9] bg-card border border-border relative overflow-hidden mb-32"
         >
           <img 
-            src="/about.jpg" 
-            alt="Track stopwatch and telemetry data" 
-            className="w-full h-full object-cover opacity-60 mix-blend-luminosity hover:mix-blend-normal transition-all duration-1000"
+            src="/sovaro-background.jpg" 
+            alt="Sovaro Management" 
+            className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-all duration-1000"
           />
           <div className="absolute inset-0 border border-primary/20 m-4 pointer-events-none" />
           <div className="absolute bottom-6 left-6 font-mono text-xs tracking-widest text-white/50 uppercase">
