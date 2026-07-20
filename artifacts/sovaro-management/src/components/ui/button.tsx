@@ -1,22 +1,47 @@
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
-const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'default' | 'outline' | 'ghost' }>(
-  ({ className, variant = 'default', ...props }, ref) => {
+const buttonVariants = cva(
+  "inline-flex items-center justify-center text-sm font-mono tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 uppercase",
+  {
+    variants: {
+      variant: {
+        default:  "bg-primary text-primary-foreground hover:bg-primary/90",
+        outline:  "border border-border bg-transparent hover:border-primary hover:text-primary text-foreground",
+        ghost:    "hover:bg-accent hover:text-accent-foreground text-foreground",
+        link:     "text-primary underline-offset-4 hover:underline",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+      },
+      size: {
+        default: "h-12 px-8",
+        sm:      "h-9 px-4 text-xs",
+        lg:      "h-14 px-10",
+        icon:    "h-9 w-9 p-0",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants>
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, ...props }, ref) => {
     return (
       <button
         ref={ref}
-        className={cn(
-          "inline-flex items-center justify-center text-sm font-mono tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 h-12 px-8 uppercase",
-          variant === 'default' && "bg-primary text-primary-foreground hover:bg-primary/90",
-          variant === 'outline' && "border border-border bg-transparent hover:border-primary hover:text-primary text-foreground",
-          variant === 'ghost' && "hover:bg-accent hover:text-accent-foreground text-foreground",
-          className
-        )}
+        className={cn(buttonVariants({ variant, size }), className)}
         {...props}
       />
     )
   }
 )
 Button.displayName = "Button"
-export { Button }
+
+export { Button, buttonVariants }
