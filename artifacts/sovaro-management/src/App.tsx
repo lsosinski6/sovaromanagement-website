@@ -1,5 +1,6 @@
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 import { Toaster } from 'sonner';
+import { Analytics } from '@vercel/analytics/react';
 import Home from '@/pages/home';
 import About from '@/pages/about';
 import Latest from '@/pages/latest';
@@ -30,6 +31,7 @@ function App() {
       <Toaster theme="dark" position="bottom-right" toastOptions={{
         className: 'border-border bg-card text-foreground font-mono rounded-none',
       }} />
+      <Analytics />
     </>
   );
 }
