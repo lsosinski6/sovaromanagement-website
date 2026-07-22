@@ -45,7 +45,10 @@ export default defineConfig({
         'attached_assets',
       ),
     },
-    dedupe: ['react', 'react-dom'],
+    dedupe: ['react', 'react-dom', 'react/jsx-runtime'],
+  },
+  optimizeDeps: {
+    include: ['@vercel/analytics/react'],
   },
   root: path.resolve(import.meta.dirname),
   build: {
