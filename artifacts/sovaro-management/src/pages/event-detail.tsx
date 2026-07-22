@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useParams, Link } from "wouter";
 import { Plane, Hotel, ArrowRight, ArrowUpRight, MapPin, Calendar, TrendingDown, Star } from "lucide-react";
-import { getEvent, bookingComUrl } from "@/data/events";
+import { getEvent, bookingComUrl, googleFlightsUrl } from "@/data/events";
 
 function formatAud(value: number): string {
   return `${value.toLocaleString("en-AU")}`;
@@ -25,8 +25,8 @@ export default function EventDetail() {
   }
 
   const activeFlights = flightTab === "cheapest"
-    ? [...event.mockCheapestFlights].sort((a, b) => a.price - b.price)
-    : [...event.mockBestFlights].sort((a, b) => a.price - b.price);
+    ? [...event.cheapestFlights].sort((a, b) => a.price - b.price)
+    : [...event.bestFlights].sort((a, b) => a.price - b.price);
 
   return (
     <div className="pt-24 pb-20 w-full relative min-h-screen">
@@ -64,8 +64,8 @@ export default function EventDetail() {
         >
           <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
             <h2 className="text-xl font-bold uppercase tracking-tight">Estimated Trip Costs</h2>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-primary border border-primary/40 px-3 py-1">
-              Placeholder data · preview only
+            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground border border-border px-3 py-1">
+              Indicative pricing · verify before booking
             </span>
           </div>
 
@@ -77,7 +77,7 @@ export default function EventDetail() {
                 Median Accommodation
               </span>
               <span className="text-4xl font-bold tracking-tighter mb-1">
-                {formatAud(event.mockMedianAccommodationPrice)}
+                {formatAud(event.medianAccommodationPrice)}
                 <span className="text-base font-light text-muted-foreground"> / night</span>
               </span>
               <span className="text-xs text-muted-foreground font-light mt-2">
@@ -129,12 +129,12 @@ export default function EventDetail() {
                   : "Best-value fare — balanced for price, routing and convenience."}
               </p>
 
-              {/* Flight grid — each card links to a pre-filled FC search */}
+              {/* Flight grid — each card links to a pre-filled Google Flights search */}
               <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
                 {activeFlights.map((flight, i) => (
                   <a
                     key={flight.code}
-                    href="https://www.flightcentre.com.au"
+                    href={googleFlightsUrl(event, flight.code)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`group flex flex-col justify-between p-4 border transition-colors duration-200 ${
@@ -163,7 +163,7 @@ export default function EventDetail() {
                       </span>
                     )}
                     <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/40 mt-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      Search FC <ArrowUpRight size={9} />
+                      Search Google Flights <ArrowUpRight size={9} />
                     </span>
                   </a>
                 ))}
@@ -201,7 +201,7 @@ export default function EventDetail() {
           </motion.a>
 
           <motion.a
-            href="https://www.flightcentre.com.au"
+            href={googleFlightsUrl(event)}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
@@ -215,10 +215,10 @@ export default function EventDetail() {
               Flights
             </h2>
             <p className="text-muted-foreground text-sm font-light leading-relaxed mb-8 flex-1">
-              Search flights to {event.flightRegionLabel} via Flight Centre.
+              Search flights to {event.flightRegionLabel} via Google Flights.
             </p>
             <span className="font-mono text-xs uppercase tracking-widest flex items-center gap-2 text-foreground group-hover:text-primary transition-colors">
-              Search on Flight Centre <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              Search on Google Flights <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </span>
           </motion.a>
         </div>

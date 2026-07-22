@@ -17,21 +17,18 @@ export interface TravelEvent {
   summary: string;
   // Booking.com: the place name to search accommodation in.
   bookingCity: string;
-  // Flight Centre: destination region slug for domestic AU events.
-  flightRegionSlug: string;
+  // Label shown in the flights panel header, e.g. "Brisbane (BNE)"
   flightRegionLabel: string;
-  // Flight Centre: destination city slug used in per-city search URLs,
-  // e.g. "brisbane", "port-macquarie", "nice", "hawaii".
-  destinationFlightSlug: string;
-  // Optional override for international or non-standard FC URLs.
-  flightCentreUrlOverride?: string;
-  // --- PLACEHOLDER PRICING (mock data for layout preview only) ---
+  // IATA code for the arrival airport — used to build Google Flights URLs.
+  destinationIata: string;
+  // Human-readable destination name for Google Flights ?q= query, e.g. "Nice France"
+  googleFlightsDestination: string;
   // Median nightly accommodation price in the region, AUD.
-  mockMedianAccommodationPrice: number;
-  // Cheapest one-way flight found from each Australian capital city, AUD.
-  mockCheapestFlights: FlightOption[];
-  // Best-value flight (balance of price, routing & convenience), AUD.
-  mockBestFlights: FlightOption[];
+  medianAccommodationPrice: number;
+  // Lowest one-way fare from each Australian capital city, AUD.
+  cheapestFlights: FlightOption[];
+  // Best-value fare — balanced for price, routing and convenience.
+  bestFlights: FlightOption[];
 }
 
 export const events: TravelEvent[] = [
@@ -45,29 +42,27 @@ export const events: TravelEvent[] = [
     summary:
       "The pinnacle of half-distance triathlon. Nice's legendary Promenade des Anglais hosts a 1.9km Mediterranean swim, 90km ride into the hills and a 21.1km run back along the coast — where the world's best age-groupers and pros decide the global title.",
     bookingCity: "Nice, France",
-    flightRegionSlug: "",
     flightRegionLabel: "Nice (NCE)",
-    destinationFlightSlug: "nice",
-    flightCentreUrlOverride:
-      "https://www.flightcentre.com.au/flights/cheap-flights-to-nice-france",
-    mockMedianAccommodationPrice: 390,
-    mockCheapestFlights: [
-      { city: "Perth",   code: "PER", price: 2080, via: "via SIN" },
-      { city: "Darwin",  code: "DRW", price: 2190, via: "via KUL" },
-      { city: "Adelaide",code: "ADL", price: 1960, via: "via SIN" },
-      { city: "Brisbane",code: "BNE", price: 1880, via: "via SIN" },
-      { city: "Canberra",code: "CBR", price: 1910, via: "via SIN" },
-      { city: "Melbourne",code: "MEL", price: 1830, via: "via SIN" },
-      { city: "Sydney",  code: "SYD", price: 1760, via: "via SIN" },
+    destinationIata: "NCE",
+    googleFlightsDestination: "Nice France",
+    medianAccommodationPrice: 180,
+    cheapestFlights: [
+      { city: "Perth",    code: "PER", price: 810,  via: "via DXB" },
+      { city: "Darwin",   code: "DRW", price: 1090, via: "via KUL" },
+      { city: "Adelaide", code: "ADL", price: 880,  via: "via SIN" },
+      { city: "Brisbane", code: "BNE", price: 920,  via: "via SIN" },
+      { city: "Canberra", code: "CBR", price: 870,  via: "via SYD+SIN" },
+      { city: "Melbourne",code: "MEL", price: 890,  via: "via SIN" },
+      { city: "Sydney",   code: "SYD", price: 850,  via: "via SIN" },
     ],
-    mockBestFlights: [
-      { city: "Perth",   code: "PER", price: 2390, via: "via DXB" },
-      { city: "Darwin",  code: "DRW", price: 2520, via: "via SIN" },
-      { city: "Adelaide",code: "ADL", price: 2260, via: "via DXB" },
-      { city: "Brisbane",code: "BNE", price: 2210, via: "via DXB" },
-      { city: "Canberra",code: "CBR", price: 2240, via: "via DXB" },
-      { city: "Melbourne",code: "MEL", price: 2180, via: "via DXB" },
-      { city: "Sydney",  code: "SYD", price: 2130, via: "via DXB" },
+    bestFlights: [
+      { city: "Perth",    code: "PER", price: 1050, via: "via DXB" },
+      { city: "Darwin",   code: "DRW", price: 1380, via: "via SIN" },
+      { city: "Adelaide", code: "ADL", price: 1160, via: "via DXB" },
+      { city: "Brisbane", code: "BNE", price: 1220, via: "via DXB" },
+      { city: "Canberra", code: "CBR", price: 1170, via: "via SYD+DXB" },
+      { city: "Melbourne",code: "MEL", price: 1190, via: "via DXB" },
+      { city: "Sydney",   code: "SYD", price: 1150, via: "via DXB" },
     ],
   },
 
@@ -81,27 +76,27 @@ export const events: TravelEvent[] = [
     summary:
       "One of Oceania's most popular half-distance events. A Pacific-side swim off Mooloolaba Beach, a coastal bike leg and a spectator-lined run finishing right on the Esplanade. Sort your stay and flights below, then let us handle the rest.",
     bookingCity: "Mooloolaba, Queensland, Australia",
-    flightRegionSlug: "au-qld-brisbane",
-    flightRegionLabel: "Brisbane (BNE)",
-    destinationFlightSlug: "brisbane",
-    mockMedianAccommodationPrice: 210,
-    mockCheapestFlights: [
-      { city: "Darwin",  code: "DRW", price: 398, via: "via BNE" },
-      { city: "Perth",   code: "PER", price: 369, via: "via SYD" },
-      { city: "Hobart",  code: "HBA", price: 259, via: "via MEL" },
-      { city: "Adelaide",code: "ADL", price: 245, via: "Direct" },
-      { city: "Canberra",code: "CBR", price: 195, via: "via SYD" },
-      { city: "Melbourne",code: "MEL", price: 215, via: "Direct" },
-      { city: "Sydney",  code: "SYD", price: 189, via: "Direct" },
+    flightRegionLabel: "Sunshine Coast (MCY)",
+    destinationIata: "MCY",
+    googleFlightsDestination: "Sunshine Coast Australia",
+    medianAccommodationPrice: 140,
+    cheapestFlights: [
+      { city: "Darwin",   code: "DRW", price: 379, via: "via BNE" },
+      { city: "Perth",    code: "PER", price: 309, via: "Direct" },
+      { city: "Hobart",   code: "HBA", price: 239, via: "via MEL" },
+      { city: "Adelaide", code: "ADL", price: 199, via: "Direct" },
+      { city: "Canberra", code: "CBR", price: 139, via: "via SYD" },
+      { city: "Melbourne",code: "MEL", price: 149, via: "Direct" },
+      { city: "Sydney",   code: "SYD", price: 99,  via: "Direct" },
     ],
-    mockBestFlights: [
-      { city: "Darwin",  code: "DRW", price: 469, via: "Direct" },
-      { city: "Perth",   code: "PER", price: 429, via: "Direct" },
-      { city: "Hobart",  code: "HBA", price: 319, via: "via MEL" },
-      { city: "Adelaide",code: "ADL", price: 299, via: "Direct" },
-      { city: "Canberra",code: "CBR", price: 249, via: "Direct" },
-      { city: "Melbourne",code: "MEL", price: 269, via: "Direct" },
-      { city: "Sydney",  code: "SYD", price: 239, via: "Direct" },
+    bestFlights: [
+      { city: "Darwin",   code: "DRW", price: 439, via: "via BNE" },
+      { city: "Perth",    code: "PER", price: 369, via: "Direct" },
+      { city: "Hobart",   code: "HBA", price: 289, via: "via MEL" },
+      { city: "Adelaide", code: "ADL", price: 249, via: "Direct" },
+      { city: "Canberra", code: "CBR", price: 179, via: "Direct" },
+      { city: "Melbourne",code: "MEL", price: 199, via: "Direct" },
+      { city: "Sydney",   code: "SYD", price: 139, via: "Direct" },
     ],
   },
 
@@ -115,29 +110,27 @@ export const events: TravelEvent[] = [
     summary:
       "The holy grail of triathlon. A 3.8km ocean swim in Kailua Bay, 180.2km across the lava fields of the Big Island and a 42.2km run under the Hawaiian sun — this is where the IRONMAN Pro Series title is decided.",
     bookingCity: "Kailua-Kona, Hawaii, USA",
-    flightRegionSlug: "",
     flightRegionLabel: "Kona (KOA)",
-    destinationFlightSlug: "hawaii",
-    flightCentreUrlOverride:
-      "https://www.flightcentre.com.au/flights/cheap-flights-to-hawaii",
-    mockMedianAccommodationPrice: 430,
-    mockCheapestFlights: [
-      { city: "Perth",   code: "PER", price: 1590, via: "via SYD+HNL" },
-      { city: "Darwin",  code: "DRW", price: 1420, via: "via BNE+HNL" },
-      { city: "Adelaide",code: "ADL", price: 1260, via: "via SYD+HNL" },
-      { city: "Canberra",code: "CBR", price: 1170, via: "via SYD+HNL" },
-      { city: "Melbourne",code: "MEL", price: 1130, via: "via HNL" },
-      { city: "Brisbane",code: "BNE", price: 1050, via: "via HNL" },
-      { city: "Sydney",  code: "SYD", price: 1090, via: "via HNL" },
+    destinationIata: "KOA",
+    googleFlightsDestination: "Kona Hawaii",
+    medianAccommodationPrice: 280,
+    cheapestFlights: [
+      { city: "Perth",    code: "PER", price: 1050, via: "via SYD+HNL" },
+      { city: "Darwin",   code: "DRW", price: 980,  via: "via BNE+HNL" },
+      { city: "Adelaide", code: "ADL", price: 800,  via: "via SYD+HNL" },
+      { city: "Canberra", code: "CBR", price: 740,  via: "via SYD+HNL" },
+      { city: "Melbourne",code: "MEL", price: 760,  via: "via HNL" },
+      { city: "Brisbane", code: "BNE", price: 690,  via: "via HNL" },
+      { city: "Sydney",   code: "SYD", price: 720,  via: "via HNL" },
     ],
-    mockBestFlights: [
-      { city: "Perth",   code: "PER", price: 1890, via: "via HNL" },
-      { city: "Darwin",  code: "DRW", price: 1760, via: "via SYD+HNL" },
-      { city: "Adelaide",code: "ADL", price: 1580, via: "via MEL+HNL" },
-      { city: "Canberra",code: "CBR", price: 1460, via: "via SYD+HNL" },
-      { city: "Melbourne",code: "MEL", price: 1420, via: "via HNL" },
-      { city: "Brisbane",code: "BNE", price: 1280, via: "via HNL" },
-      { city: "Sydney",  code: "SYD", price: 1380, via: "via HNL" },
+    bestFlights: [
+      { city: "Perth",    code: "PER", price: 1290, via: "via HNL" },
+      { city: "Darwin",   code: "DRW", price: 1180, via: "via SYD+HNL" },
+      { city: "Adelaide", code: "ADL", price: 1020, via: "via MEL+HNL" },
+      { city: "Canberra", code: "CBR", price: 960,  via: "via SYD+HNL" },
+      { city: "Melbourne",code: "MEL", price: 990,  via: "via HNL" },
+      { city: "Brisbane", code: "BNE", price: 880,  via: "via HNL" },
+      { city: "Sydney",   code: "SYD", price: 950,  via: "via HNL" },
     ],
   },
 
@@ -151,29 +144,29 @@ export const events: TravelEvent[] = [
     summary:
       "One of the oldest and most prestigious Ironman events in the region. A harbour swim, a challenging bike course through the hinterland and a run flanked by one of the loudest, most passionate crowds on the Australian circuit.",
     bookingCity: "Port Macquarie, New South Wales, Australia",
-    flightRegionSlug: "au-nsw-port-macquarie",
     flightRegionLabel: "Port Macquarie (PQQ)",
-    destinationFlightSlug: "port-macquarie",
-    mockMedianAccommodationPrice: 165,
-    mockCheapestFlights: [
-      { city: "Perth",   code: "PER", price: 369, via: "via SYD" },
-      { city: "Darwin",  code: "DRW", price: 419, via: "via SYD" },
-      { city: "Adelaide",code: "ADL", price: 229, via: "via SYD" },
-      { city: "Hobart",  code: "HBA", price: 219, via: "via MEL" },
-      { city: "Melbourne",code: "MEL", price: 179, via: "Direct" },
-      { city: "Brisbane",code: "BNE", price: 149, via: "Direct" },
-      { city: "Canberra",code: "CBR", price: 129, via: "Direct" },
-      { city: "Sydney",  code: "SYD", price: 109, via: "Direct" },
+    destinationIata: "PQQ",
+    googleFlightsDestination: "Port Macquarie",
+    medianAccommodationPrice: 130,
+    cheapestFlights: [
+      { city: "Perth",    code: "PER", price: 389, via: "via SYD" },
+      { city: "Darwin",   code: "DRW", price: 439, via: "via SYD" },
+      { city: "Adelaide", code: "ADL", price: 259, via: "via SYD" },
+      { city: "Hobart",   code: "HBA", price: 229, via: "via MEL" },
+      { city: "Melbourne",code: "MEL", price: 189, via: "Direct" },
+      { city: "Brisbane", code: "BNE", price: 159, via: "Direct" },
+      { city: "Canberra", code: "CBR", price: 149, via: "via SYD" },
+      { city: "Sydney",   code: "SYD", price: 109, via: "Direct" },
     ],
-    mockBestFlights: [
-      { city: "Perth",   code: "PER", price: 459, via: "via SYD" },
-      { city: "Darwin",  code: "DRW", price: 499, via: "via SYD" },
-      { city: "Adelaide",code: "ADL", price: 299, via: "via SYD" },
-      { city: "Hobart",  code: "HBA", price: 289, via: "via MEL" },
+    bestFlights: [
+      { city: "Perth",    code: "PER", price: 469, via: "via SYD" },
+      { city: "Darwin",   code: "DRW", price: 509, via: "via SYD" },
+      { city: "Adelaide", code: "ADL", price: 319, via: "via SYD" },
+      { city: "Hobart",   code: "HBA", price: 289, via: "via MEL" },
       { city: "Melbourne",code: "MEL", price: 249, via: "Direct" },
-      { city: "Brisbane",code: "BNE", price: 199, via: "Direct" },
-      { city: "Canberra",code: "CBR", price: 179, via: "Direct" },
-      { city: "Sydney",  code: "SYD", price: 169, via: "Direct" },
+      { city: "Brisbane", code: "BNE", price: 209, via: "Direct" },
+      { city: "Canberra", code: "CBR", price: 199, via: "Direct" },
+      { city: "Sydney",   code: "SYD", price: 169, via: "Direct" },
     ],
   },
 
@@ -187,27 +180,27 @@ export const events: TravelEvent[] = [
     summary:
       "The Asia-Pacific Championship comes home. Busselton's famously flat, fast course makes it a perennial personal-best venue — fly into Perth, then it's a scenic 2.5-hour drive south to the start line.",
     bookingCity: "Busselton, Western Australia, Australia",
-    flightRegionSlug: "au-wa-perth",
     flightRegionLabel: "Perth (PER)",
-    destinationFlightSlug: "perth",
-    mockMedianAccommodationPrice: 195,
-    mockCheapestFlights: [
-      { city: "Darwin",  code: "DRW", price: 339, via: "via SYD" },
-      { city: "Hobart",  code: "HBA", price: 299, via: "via MEL" },
-      { city: "Brisbane",code: "BNE", price: 269, via: "Direct" },
-      { city: "Canberra",code: "CBR", price: 259, via: "Direct" },
-      { city: "Sydney",  code: "SYD", price: 249, via: "Direct" },
-      { city: "Melbourne",code: "MEL", price: 219, via: "Direct" },
-      { city: "Adelaide",code: "ADL", price: 169, via: "Direct" },
+    destinationIata: "PER",
+    googleFlightsDestination: "Perth Australia",
+    medianAccommodationPrice: 120,
+    cheapestFlights: [
+      { city: "Darwin",   code: "DRW", price: 319, via: "via MEL" },
+      { city: "Hobart",   code: "HBA", price: 279, via: "via MEL" },
+      { city: "Brisbane", code: "BNE", price: 229, via: "Direct" },
+      { city: "Canberra", code: "CBR", price: 219, via: "Direct" },
+      { city: "Sydney",   code: "SYD", price: 189, via: "Direct" },
+      { city: "Melbourne",code: "MEL", price: 169, via: "Direct" },
+      { city: "Adelaide", code: "ADL", price: 159, via: "Direct" },
     ],
-    mockBestFlights: [
-      { city: "Darwin",  code: "DRW", price: 429, via: "via MEL" },
-      { city: "Hobart",  code: "HBA", price: 369, via: "via MEL" },
-      { city: "Brisbane",code: "BNE", price: 339, via: "Direct" },
-      { city: "Canberra",code: "CBR", price: 329, via: "Direct" },
-      { city: "Sydney",  code: "SYD", price: 319, via: "Direct" },
-      { city: "Melbourne",code: "MEL", price: 279, via: "Direct" },
-      { city: "Adelaide",code: "ADL", price: 239, via: "Direct" },
+    bestFlights: [
+      { city: "Darwin",   code: "DRW", price: 399, via: "via MEL" },
+      { city: "Hobart",   code: "HBA", price: 349, via: "via MEL" },
+      { city: "Brisbane", code: "BNE", price: 299, via: "Direct" },
+      { city: "Canberra", code: "CBR", price: 289, via: "Direct" },
+      { city: "Sydney",   code: "SYD", price: 259, via: "Direct" },
+      { city: "Melbourne",code: "MEL", price: 229, via: "Direct" },
+      { city: "Adelaide", code: "ADL", price: 219, via: "Direct" },
     ],
   },
 ];
@@ -226,31 +219,26 @@ export function bookingComUrl(city: string): string {
   return `https://www.booking.com/searchresults.html?${params.toString()}`;
 }
 
-// Builds a Flight Centre AU "flights to <region>" deep link (generic card).
-// For international events, uses flightCentreUrlOverride on the event instead.
-export function flightCentreUrl(event: TravelEvent): string {
-  if (event.flightCentreUrlOverride) return event.flightCentreUrlOverride;
-  return `https://www.flightcentre.com.au/flights/${event.flightRegionSlug}`;
-}
-
-// Maps IATA departure codes to the city-name slug used in Flight Centre URLs.
-const FC_CITY_SLUG: Record<string, string> = {
-  SYD: "sydney",
-  MEL: "melbourne",
-  BNE: "brisbane",
-  ADL: "adelaide",
-  PER: "perth",
-  CBR: "canberra",
-  HBA: "hobart",
-  DRW: "darwin",
+// IATA code → city name used in Google Flights ?q= queries.
+const CITY_NAME: Record<string, string> = {
+  SYD: "Sydney",
+  MEL: "Melbourne",
+  BNE: "Brisbane",
+  ADL: "Adelaide",
+  PER: "Perth",
+  CBR: "Canberra",
+  HBA: "Hobart",
+  DRW: "Darwin",
 };
 
-// Builds a per-departure-city Flight Centre search URL, e.g.
-// https://www.flightcentre.com.au/flights/cheap-flights-from-sydney-to-brisbane
-export function flightCentreSearchUrl(
-  event: TravelEvent,
-  departureCode: string,
-): string {
-  const depSlug = FC_CITY_SLUG[departureCode] ?? departureCode.toLowerCase();
-  return `https://www.flightcentre.com.au/flights/cheap-flights-from-${depSlug}-to-${event.destinationFlightSlug}`;
+// Builds a Google Flights search URL.
+// With a departureCode: pre-fills both origin and destination.
+// Without: pre-fills destination only.
+export function googleFlightsUrl(event: TravelEvent, departureCode?: string): string {
+  const dest = event.googleFlightsDestination;
+  if (departureCode) {
+    const city = CITY_NAME[departureCode] ?? departureCode;
+    return `https://www.google.com/flights?q=flights+from+${encodeURIComponent(city)}+to+${encodeURIComponent(dest)}`;
+  }
+  return `https://www.google.com/flights?q=flights+to+${encodeURIComponent(dest)}`;
 }
