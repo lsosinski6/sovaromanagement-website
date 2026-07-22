@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useParams, Link } from "wouter";
 import { Plane, Hotel, ArrowRight, ArrowUpRight, MapPin, Calendar, TrendingDown, Star } from "lucide-react";
-import { getEvent, bookingComUrl, flightCentreUrl } from "@/data/events";
+import { getEvent, bookingComUrl, flightCentreUrl, flightCentreSearchUrl } from "@/data/events";
 
 function formatAud(value: number): string {
   return `${value.toLocaleString("en-AU")}`;
@@ -129,13 +129,18 @@ export default function EventDetail() {
                   : "Best-value fare — balanced for price, routing and convenience."}
               </p>
 
-              {/* Flight grid */}
+              {/* Flight grid — each card links to a pre-filled FC search */}
               <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
                 {activeFlights.map((flight, i) => (
-                  <div
+                  <a
                     key={flight.code}
-                    className={`flex flex-col justify-between p-4 border ${
-                      i === 0 ? "border-primary bg-primary/5" : "border-border"
+                    href={flightCentreSearchUrl(event, flight.code)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group flex flex-col justify-between p-4 border transition-colors duration-200 ${
+                      i === 0
+                        ? "border-primary bg-primary/5 hover:bg-primary/10"
+                        : "border-border hover:border-primary/60 hover:bg-card/80"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-2">
@@ -157,7 +162,10 @@ export default function EventDetail() {
                         {flight.via}
                       </span>
                     )}
-                  </div>
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/40 mt-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Search FC <ArrowUpRight size={9} />
+                    </span>
+                  </a>
                 ))}
               </div>
             </div>

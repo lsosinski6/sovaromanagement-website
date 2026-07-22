@@ -20,6 +20,9 @@ export interface TravelEvent {
   // Flight Centre: destination region slug for domestic AU events.
   flightRegionSlug: string;
   flightRegionLabel: string;
+  // Flight Centre: destination city slug used in per-city search URLs,
+  // e.g. "brisbane", "port-macquarie", "nice", "hawaii".
+  destinationFlightSlug: string;
   // Optional override for international or non-standard FC URLs.
   flightCentreUrlOverride?: string;
   // --- PLACEHOLDER PRICING (mock data for layout preview only) ---
@@ -44,6 +47,7 @@ export const events: TravelEvent[] = [
     bookingCity: "Nice, France",
     flightRegionSlug: "",
     flightRegionLabel: "Nice (NCE)",
+    destinationFlightSlug: "nice",
     flightCentreUrlOverride:
       "https://www.flightcentre.com.au/flights/cheap-flights-to-nice-france",
     mockMedianAccommodationPrice: 390,
@@ -79,6 +83,7 @@ export const events: TravelEvent[] = [
     bookingCity: "Mooloolaba, Queensland, Australia",
     flightRegionSlug: "au-qld-brisbane",
     flightRegionLabel: "Brisbane (BNE)",
+    destinationFlightSlug: "brisbane",
     mockMedianAccommodationPrice: 210,
     mockCheapestFlights: [
       { city: "Darwin",  code: "DRW", price: 398, via: "via BNE" },
@@ -112,6 +117,7 @@ export const events: TravelEvent[] = [
     bookingCity: "Kailua-Kona, Hawaii, USA",
     flightRegionSlug: "",
     flightRegionLabel: "Kona (KOA)",
+    destinationFlightSlug: "hawaii",
     flightCentreUrlOverride:
       "https://www.flightcentre.com.au/flights/cheap-flights-to-hawaii",
     mockMedianAccommodationPrice: 430,
@@ -147,6 +153,7 @@ export const events: TravelEvent[] = [
     bookingCity: "Port Macquarie, New South Wales, Australia",
     flightRegionSlug: "au-nsw-port-macquarie",
     flightRegionLabel: "Port Macquarie (PQQ)",
+    destinationFlightSlug: "port-macquarie",
     mockMedianAccommodationPrice: 165,
     mockCheapestFlights: [
       { city: "Perth",   code: "PER", price: 369, via: "via SYD" },
@@ -182,6 +189,7 @@ export const events: TravelEvent[] = [
     bookingCity: "Busselton, Western Australia, Australia",
     flightRegionSlug: "au-wa-perth",
     flightRegionLabel: "Perth (PER)",
+    destinationFlightSlug: "perth",
     mockMedianAccommodationPrice: 195,
     mockCheapestFlights: [
       { city: "Darwin",  code: "DRW", price: 339, via: "via SYD" },
@@ -218,9 +226,31 @@ export function bookingComUrl(city: string): string {
   return `https://www.booking.com/searchresults.html?${params.toString()}`;
 }
 
-// Builds a Flight Centre AU "flights to <region>" deep link.
-// For international events, use flightCentreUrlOverride on the event instead.
+// Builds a Flight Centre AU "flights to <region>" deep link (generic card).
+// For international events, uses flightCentreUrlOverride on the event instead.
 export function flightCentreUrl(event: TravelEvent): string {
   if (event.flightCentreUrlOverride) return event.flightCentreUrlOverride;
   return `https://www.flightcentre.com.au/flights/${event.flightRegionSlug}`;
+}
+
+// Maps IATA departure codes to the city-name slug used in Flight Centre URLs.
+const FC_CITY_SLUG: Record<string, string> = {
+  SYD: "sydney",
+  MEL: "melbourne",
+  BNE: "brisbane",
+  ADL: "adelaide",
+  PER: "perth",
+  CBR: "canberra",
+  HBA: "hobart",
+  DRW: "darwin",
+};
+
+// Builds a per-departure-city Flight Centre search URL, e.g.
+// https://www.flightcentre.com.au/flights/cheap-flights-from-sydney-to-brisbane
+export function flightCentreSearchUrl(
+  event: TravelEvent,
+  departureCode: string,
+): string {
+  const depSlug = FC_CITY_SLUG[departureCode] ?? departureCode.toLowerCase();
+  return `https://www.flightcentre.com.au/flights/cheap-flights-from-${depSlug}-to-${event.destinationFlightSlug}`;
 }

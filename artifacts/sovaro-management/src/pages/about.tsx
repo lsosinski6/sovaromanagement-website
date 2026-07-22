@@ -32,17 +32,23 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="w-full aspect-[21/9] bg-card border border-border relative overflow-hidden mb-32"
+          className="w-full aspect-[21/9] bg-black border border-border relative overflow-hidden mb-32"
         >
           <img 
-            src="/sovaro-background.jpg" 
-            alt="Sovaro Management" 
-            className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-all duration-1000"
+            src="/sovaro-bg-v2.jpg" 
+            alt="" 
+            aria-hidden="true"
+            className="w-full h-full object-cover opacity-80"
           />
-          <div className="absolute inset-0 border border-primary/20 m-4 pointer-events-none" />
-          <div className="absolute bottom-6 left-6 font-mono text-xs tracking-widest text-white/50 uppercase">
-            SYS.OP.DATA // {new Date().getFullYear()}
+          {/* Logo centred over the background */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <img
+              src="/sovaro-logo-full.png"
+              alt="Sovaro Management"
+              className="w-56 md:w-80 lg:w-96 select-none pointer-events-none"
+            />
           </div>
+          <div className="absolute inset-0 border border-white/10 m-4 pointer-events-none" />
         </motion.div>
 
         {/* Content Blocks */}
