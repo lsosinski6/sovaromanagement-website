@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useParams, Link } from "wouter";
 import { Plane, Hotel, ArrowRight, ArrowUpRight, MapPin, Calendar, TrendingDown, Star } from "lucide-react";
-import { getEvent, bookingComUrl, flightCentreUrl } from "@/data/events";
+import { getEvent, bookingComUrl } from "@/data/events";
 
 function formatAud(value: number): string {
   return `${value.toLocaleString("en-AU")}`;
@@ -134,7 +134,7 @@ export default function EventDetail() {
                 {activeFlights.map((flight, i) => (
                   <a
                     key={flight.code}
-                    href={flightCentreUrl(event)}
+                    href="https://www.flightcentre.com.au"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`group flex flex-col justify-between p-4 border transition-colors duration-200 ${
@@ -201,7 +201,7 @@ export default function EventDetail() {
           </motion.a>
 
           <motion.a
-            href={flightCentreUrl(event)}
+            href="https://www.flightcentre.com.au"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
