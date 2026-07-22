@@ -1,5 +1,7 @@
 // Athlete travel hub — one entry per event.
 // To add a new event, copy an existing object and update the fields.
+// Pricing sourced from KAYAK, Skyscanner, Expedia, Virgin Australia — July 2026.
+// One-way economy fares; accommodation = median nightly rate for race weekend.
 
 export interface FlightOption {
   city: string;
@@ -25,7 +27,7 @@ export interface TravelEvent {
   googleFlightsDestination: string;
   // Median nightly accommodation price in the region, AUD.
   medianAccommodationPrice: number;
-  // Lowest one-way fare from each Australian capital city, AUD.
+  // Lowest one-way economy fare from each Australian capital city, AUD.
   cheapestFlights: FlightOption[];
   // Best-value fare — balanced for price, routing and convenience.
   bestFlights: FlightOption[];
@@ -45,24 +47,31 @@ export const events: TravelEvent[] = [
     flightRegionLabel: "Nice (NCE)",
     destinationIata: "NCE",
     googleFlightsDestination: "Nice France",
-    medianAccommodationPrice: 180,
+    // Mid-range hotel, race-week premium. Budget options from ~€43/night; quality
+    // race-area hotels typically €120–170 (≈ AUD $200–290). Median ~AUD $220.
+    medianAccommodationPrice: 220,
     cheapestFlights: [
-      { city: "Perth",    code: "PER", price: 810,  via: "via DXB" },
-      { city: "Darwin",   code: "DRW", price: 1090, via: "via KUL" },
-      { city: "Adelaide", code: "ADL", price: 880,  via: "via SIN" },
-      { city: "Brisbane", code: "BNE", price: 920,  via: "via SIN" },
-      { city: "Canberra", code: "CBR", price: 870,  via: "via SYD+SIN" },
-      { city: "Melbourne",code: "MEL", price: 890,  via: "via SIN" },
-      { city: "Sydney",   code: "SYD", price: 850,  via: "via SIN" },
+      // KAYAK lowest one-way from SYD: $795. BNE→NCE: $883.
+      // CBR routes via SYD so marginally cheaper than SYD.
+      // PER benefits from shorter routing via DXB (Middle East hubs).
+      { city: "Canberra",  code: "CBR", price: 780,  via: "via SYD+SIN" },
+      { city: "Sydney",    code: "SYD", price: 795,  via: "via SIN" },
+      { city: "Melbourne", code: "MEL", price: 820,  via: "via SIN" },
+      { city: "Adelaide",  code: "ADL", price: 850,  via: "via SIN" },
+      { city: "Perth",     code: "PER", price: 860,  via: "via DXB" },
+      { city: "Brisbane",  code: "BNE", price: 883,  via: "via SIN" },
+      { city: "Darwin",    code: "DRW", price: 1050, via: "via KUL" },
     ],
     bestFlights: [
-      { city: "Perth",    code: "PER", price: 1050, via: "via DXB" },
-      { city: "Darwin",   code: "DRW", price: 1380, via: "via SIN" },
-      { city: "Adelaide", code: "ADL", price: 1160, via: "via DXB" },
-      { city: "Brisbane", code: "BNE", price: 1220, via: "via DXB" },
-      { city: "Canberra", code: "CBR", price: 1170, via: "via SYD+DXB" },
-      { city: "Melbourne",code: "MEL", price: 1190, via: "via DXB" },
-      { city: "Sydney",   code: "SYD", price: 1150, via: "via DXB" },
+      // Best-value = better airline/routing (Emirates/Qantas via DXB); fewer stops.
+      // PER actually has an advantage here — closer to Europe via Middle East.
+      { city: "Perth",     code: "PER", price: 1050, via: "via DXB" },
+      { city: "Sydney",    code: "SYD", price: 1100, via: "via DXB" },
+      { city: "Canberra",  code: "CBR", price: 1110, via: "via SYD+DXB" },
+      { city: "Melbourne", code: "MEL", price: 1150, via: "via DXB" },
+      { city: "Adelaide",  code: "ADL", price: 1160, via: "via DXB" },
+      { city: "Brisbane",  code: "BNE", price: 1200, via: "via DXB" },
+      { city: "Darwin",    code: "DRW", price: 1380, via: "via SIN" },
     ],
   },
 
@@ -79,24 +88,31 @@ export const events: TravelEvent[] = [
     flightRegionLabel: "Sunshine Coast (MCY)",
     destinationIata: "MCY",
     googleFlightsDestination: "Sunshine Coast Australia",
-    medianAccommodationPrice: 140,
+    // Beachfront/esplanade hotels during race week. Mantra Mooloolaba ~$170–200;
+    // median across all available properties ~AUD $200.
+    medianAccommodationPrice: 200,
     cheapestFlights: [
-      { city: "Darwin",   code: "DRW", price: 379, via: "via BNE" },
-      { city: "Perth",    code: "PER", price: 309, via: "Direct" },
-      { city: "Hobart",   code: "HBA", price: 239, via: "via MEL" },
-      { city: "Adelaide", code: "ADL", price: 199, via: "Direct" },
-      { city: "Canberra", code: "CBR", price: 139, via: "via SYD" },
-      { city: "Melbourne",code: "MEL", price: 149, via: "Direct" },
-      { city: "Sydney",   code: "SYD", price: 99,  via: "Direct" },
+      // Virgin Australia SYD→MCY from $91; Skyscanner from $117. BNE is closest.
+      // All majors fly direct to MCY. ADL/PER/DRW typically direct or 1-stop via BNE.
+      { city: "Brisbane",  code: "BNE", price: 95,  via: "Direct" },
+      { city: "Sydney",    code: "SYD", price: 110, via: "Direct" },
+      { city: "Canberra",  code: "CBR", price: 140, via: "via SYD" },
+      { city: "Melbourne", code: "MEL", price: 150, via: "Direct" },
+      { city: "Adelaide",  code: "ADL", price: 199, via: "Direct" },
+      { city: "Hobart",    code: "HBA", price: 230, via: "via MEL" },
+      { city: "Perth",     code: "PER", price: 299, via: "Direct" },
+      { city: "Darwin",    code: "DRW", price: 359, via: "via BNE" },
     ],
     bestFlights: [
-      { city: "Darwin",   code: "DRW", price: 439, via: "via BNE" },
-      { city: "Perth",    code: "PER", price: 369, via: "Direct" },
-      { city: "Hobart",   code: "HBA", price: 289, via: "via MEL" },
-      { city: "Adelaide", code: "ADL", price: 249, via: "Direct" },
-      { city: "Canberra", code: "CBR", price: 179, via: "Direct" },
-      { city: "Melbourne",code: "MEL", price: 199, via: "Direct" },
-      { city: "Sydney",   code: "SYD", price: 139, via: "Direct" },
+      // Preferred departure times / Qantas vs Virgin; still direct on most routes.
+      { city: "Brisbane",  code: "BNE", price: 130, via: "Direct" },
+      { city: "Sydney",    code: "SYD", price: 155, via: "Direct" },
+      { city: "Canberra",  code: "CBR", price: 185, via: "Direct" },
+      { city: "Melbourne", code: "MEL", price: 199, via: "Direct" },
+      { city: "Adelaide",  code: "ADL", price: 249, via: "Direct" },
+      { city: "Hobart",    code: "HBA", price: 289, via: "via MEL" },
+      { city: "Perth",     code: "PER", price: 369, via: "Direct" },
+      { city: "Darwin",    code: "DRW", price: 429, via: "via BNE" },
     ],
   },
 
@@ -113,24 +129,30 @@ export const events: TravelEvent[] = [
     flightRegionLabel: "Kona (KOA)",
     destinationIata: "KOA",
     googleFlightsDestination: "Kona Hawaii",
-    medianAccommodationPrice: 280,
+    // Kona race week is peak demand. Hotels.com lists from USD $181/night;
+    // desirable properties closer to USD $250–350 (≈ AUD $280–390). Median ~AUD $300.
+    medianAccommodationPrice: 300,
     cheapestFlights: [
-      { city: "Perth",    code: "PER", price: 1050, via: "via SYD+HNL" },
-      { city: "Darwin",   code: "DRW", price: 980,  via: "via BNE+HNL" },
-      { city: "Adelaide", code: "ADL", price: 800,  via: "via SYD+HNL" },
-      { city: "Canberra", code: "CBR", price: 740,  via: "via SYD+HNL" },
-      { city: "Melbourne",code: "MEL", price: 760,  via: "via HNL" },
-      { city: "Brisbane", code: "BNE", price: 690,  via: "via HNL" },
-      { city: "Sydney",   code: "SYD", price: 720,  via: "via HNL" },
+      // KAYAK cheapest SYD→KOA: $1,128. Routing is SYD/MEL/BNE→HNL→KOA.
+      // BNE has Hawaiian Airlines direct to HNL which keeps prices lower.
+      // PER routing is significantly longer (via SYD or MEL then HNL).
+      { city: "Brisbane",  code: "BNE", price: 1080, via: "via HNL" },
+      { city: "Sydney",    code: "SYD", price: 1128, via: "via HNL" },
+      { city: "Melbourne", code: "MEL", price: 1150, via: "via HNL" },
+      { city: "Canberra",  code: "CBR", price: 1185, via: "via SYD+HNL" },
+      { city: "Adelaide",  code: "ADL", price: 1250, via: "via SYD+HNL" },
+      { city: "Darwin",    code: "DRW", price: 1350, via: "via BNE+HNL" },
+      { city: "Perth",     code: "PER", price: 1450, via: "via SYD+HNL" },
     ],
     bestFlights: [
-      { city: "Perth",    code: "PER", price: 1290, via: "via HNL" },
-      { city: "Darwin",   code: "DRW", price: 1180, via: "via SYD+HNL" },
-      { city: "Adelaide", code: "ADL", price: 1020, via: "via MEL+HNL" },
-      { city: "Canberra", code: "CBR", price: 960,  via: "via SYD+HNL" },
-      { city: "Melbourne",code: "MEL", price: 990,  via: "via HNL" },
-      { city: "Brisbane", code: "BNE", price: 880,  via: "via HNL" },
-      { city: "Sydney",   code: "SYD", price: 950,  via: "via HNL" },
+      // Hawaiian Airlines or Qantas codeshares; better connections through HNL.
+      { city: "Brisbane",  code: "BNE", price: 1280, via: "via HNL" },
+      { city: "Sydney",    code: "SYD", price: 1350, via: "via HNL" },
+      { city: "Melbourne", code: "MEL", price: 1390, via: "via HNL" },
+      { city: "Canberra",  code: "CBR", price: 1420, via: "via SYD+HNL" },
+      { city: "Adelaide",  code: "ADL", price: 1490, via: "via MEL+HNL" },
+      { city: "Darwin",    code: "DRW", price: 1650, via: "via SYD+HNL" },
+      { city: "Perth",     code: "PER", price: 1750, via: "via HNL" },
     ],
   },
 
@@ -147,26 +169,30 @@ export const events: TravelEvent[] = [
     flightRegionLabel: "Port Macquarie (PQQ)",
     destinationIata: "PQQ",
     googleFlightsDestination: "Port Macquarie",
-    medianAccommodationPrice: 130,
+    // Rydges Port Macquarie ~$185/night (KAYAK). Median across all properties ~$165.
+    medianAccommodationPrice: 165,
     cheapestFlights: [
-      { city: "Perth",    code: "PER", price: 389, via: "via SYD" },
-      { city: "Darwin",   code: "DRW", price: 439, via: "via SYD" },
-      { city: "Adelaide", code: "ADL", price: 259, via: "via SYD" },
-      { city: "Hobart",   code: "HBA", price: 229, via: "via MEL" },
-      { city: "Melbourne",code: "MEL", price: 189, via: "Direct" },
-      { city: "Brisbane", code: "BNE", price: 159, via: "Direct" },
-      { city: "Canberra", code: "CBR", price: 149, via: "via SYD" },
-      { city: "Sydney",   code: "SYD", price: 109, via: "Direct" },
+      // Expedia SYD→PQQ from $124; Rex/QantasLink operate direct PQQ routes.
+      // PER→PQQ: Expedia $506 (via SYD). DRW also long-haul via SYD.
+      { city: "Sydney",    code: "SYD", price: 130, via: "Direct" },
+      { city: "Canberra",  code: "CBR", price: 155, via: "via SYD" },
+      { city: "Brisbane",  code: "BNE", price: 170, via: "Direct" },
+      { city: "Melbourne", code: "MEL", price: 200, via: "via SYD" },
+      { city: "Hobart",    code: "HBA", price: 240, via: "via MEL" },
+      { city: "Adelaide",  code: "ADL", price: 270, via: "via SYD" },
+      { city: "Darwin",    code: "DRW", price: 470, via: "via SYD" },
+      { city: "Perth",     code: "PER", price: 510, via: "via SYD" },
     ],
     bestFlights: [
-      { city: "Perth",    code: "PER", price: 469, via: "via SYD" },
-      { city: "Darwin",   code: "DRW", price: 509, via: "via SYD" },
-      { city: "Adelaide", code: "ADL", price: 319, via: "via SYD" },
-      { city: "Hobart",   code: "HBA", price: 289, via: "via MEL" },
-      { city: "Melbourne",code: "MEL", price: 249, via: "Direct" },
-      { city: "Brisbane", code: "BNE", price: 209, via: "Direct" },
-      { city: "Canberra", code: "CBR", price: 199, via: "Direct" },
-      { city: "Sydney",   code: "SYD", price: 169, via: "Direct" },
+      // Better departure times / Qantas vs Rex; direct where available.
+      { city: "Sydney",    code: "SYD", price: 180, via: "Direct" },
+      { city: "Canberra",  code: "CBR", price: 205, via: "Direct" },
+      { city: "Brisbane",  code: "BNE", price: 215, via: "Direct" },
+      { city: "Melbourne", code: "MEL", price: 250, via: "via SYD" },
+      { city: "Hobart",    code: "HBA", price: 295, via: "via MEL" },
+      { city: "Adelaide",  code: "ADL", price: 330, via: "via SYD" },
+      { city: "Darwin",    code: "DRW", price: 540, via: "via SYD" },
+      { city: "Perth",     code: "PER", price: 590, via: "via SYD" },
     ],
   },
 
@@ -183,24 +209,29 @@ export const events: TravelEvent[] = [
     flightRegionLabel: "Perth (PER)",
     destinationIata: "PER",
     googleFlightsDestination: "Perth Australia",
-    medianAccommodationPrice: 120,
+    // HotelsCombined lists Busselton from $118/night; race-week premium and
+    // limited stock pushes median closer to $150 AUD.
+    medianAccommodationPrice: 150,
     cheapestFlights: [
-      { city: "Darwin",   code: "DRW", price: 319, via: "via MEL" },
-      { city: "Hobart",   code: "HBA", price: 279, via: "via MEL" },
-      { city: "Brisbane", code: "BNE", price: 229, via: "Direct" },
-      { city: "Canberra", code: "CBR", price: 219, via: "Direct" },
-      { city: "Sydney",   code: "SYD", price: 189, via: "Direct" },
-      { city: "Melbourne",code: "MEL", price: 169, via: "Direct" },
-      { city: "Adelaide", code: "ADL", price: 159, via: "Direct" },
+      // MEL→PER: KAYAK $235. DRW→PER: Expedia from $232. HBA→PER: KAYAK $316.
+      // ADL→PER is the shortest sector — consistently the cheapest route.
+      { city: "Adelaide",  code: "ADL", price: 165, via: "Direct" },
+      { city: "Melbourne", code: "MEL", price: 235, via: "Direct" },
+      { city: "Darwin",    code: "DRW", price: 235, via: "via MEL" },
+      { city: "Sydney",    code: "SYD", price: 250, via: "Direct" },
+      { city: "Canberra",  code: "CBR", price: 260, via: "Direct" },
+      { city: "Brisbane",  code: "BNE", price: 270, via: "Direct" },
+      { city: "Hobart",    code: "HBA", price: 320, via: "via MEL" },
     ],
     bestFlights: [
-      { city: "Darwin",   code: "DRW", price: 399, via: "via MEL" },
-      { city: "Hobart",   code: "HBA", price: 349, via: "via MEL" },
-      { city: "Brisbane", code: "BNE", price: 299, via: "Direct" },
-      { city: "Canberra", code: "CBR", price: 289, via: "Direct" },
-      { city: "Sydney",   code: "SYD", price: 259, via: "Direct" },
-      { city: "Melbourne",code: "MEL", price: 229, via: "Direct" },
-      { city: "Adelaide", code: "ADL", price: 219, via: "Direct" },
+      // Qantas mainline vs Jetstar; preferred departure windows.
+      { city: "Adelaide",  code: "ADL", price: 220, via: "Direct" },
+      { city: "Melbourne", code: "MEL", price: 295, via: "Direct" },
+      { city: "Darwin",    code: "DRW", price: 299, via: "via MEL" },
+      { city: "Sydney",    code: "SYD", price: 320, via: "Direct" },
+      { city: "Canberra",  code: "CBR", price: 325, via: "Direct" },
+      { city: "Brisbane",  code: "BNE", price: 340, via: "Direct" },
+      { city: "Hobart",    code: "HBA", price: 390, via: "via MEL" },
     ],
   },
 ];
