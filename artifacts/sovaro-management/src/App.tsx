@@ -10,11 +10,13 @@ import EventDetail from '@/pages/event-detail';
 import Contact from '@/pages/contact';
 import NotFound from '@/pages/not-found';
 import Layout from '@/components/layout';
+import ScrollToTop from '@/components/scroll-to-top';
 
 function App() {
   return (
     <>
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+        <ScrollToTop />
         <Layout>
           <Switch>
             <Route path="/" component={Home} />

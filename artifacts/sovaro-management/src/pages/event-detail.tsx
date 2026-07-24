@@ -4,8 +4,15 @@ import { useParams, Link } from "wouter";
 import { Plane, Hotel, ArrowRight, ArrowUpRight, MapPin, Calendar, TrendingDown, Star } from "lucide-react";
 import { getEvent, bookingComUrl, googleFlightsUrl } from "@/data/events";
 
-function formatAud(value: number): string {
-  return `${value.toLocaleString("en-AU")}`;
+function PriceDisplay({ value, large }: { value: number; large?: boolean }) {
+  return (
+    <span className={`font-bold tracking-tighter ${large ? "text-4xl" : "text-2xl"}`}>
+      ${value.toLocaleString("en-AU")}
+      <span className={`font-mono font-normal text-muted-foreground/50 ${large ? "text-xs ml-1" : "text-[9px] ml-0.5"}`}>
+        AUD
+      </span>
+    </span>
+  );
 }
 
 export default function EventDetail() {
@@ -24,9 +31,11 @@ export default function EventDetail() {
     );
   }
 
-  const activeFlights = flightTab === "cheapest"
-    ? [...event.cheapestFlights].sort((a, b) => a.price - b.price)
-    : [...event.bestFlights].sort((a, b) => a.price - b.price);
+  // Domestic-only races show a single price column — no Best/Cheapest toggle.
+  const showTabs = !event.domesticOnly;
+  const activeFlights = showTabs && flightTab === "best"
+    ? [...event.bestFlights].sort((a, b) => a.price - b.price)
+    : [...event.cheapestFlights].sort((a, b) => a.price - b.price);
 
   return (
     <div className="pt-24 pb-20 w-full relative min-h-screen">
@@ -64,24 +73,21 @@ export default function EventDetail() {
         >
           <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
             <h2 className="text-xl font-bold uppercase tracking-tight">Estimated Trip Costs</h2>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground border border-border px-3 py-1">
-              Indicative pricing · verify before booking
-            </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,320px)_1fr] gap-6">
-            {/* Median accommodation */}
+            {/* Estimated accommodation */}
             <div className="bg-card border border-border p-8 flex flex-col">
               <Hotel className="w-6 h-6 text-primary mb-6" />
               <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2">
-                Median Accommodation
+                Estimated Accommodation
               </span>
-              <span className="text-4xl font-bold tracking-tighter mb-1">
-                {formatAud(event.medianAccommodationPrice)}
+              <div className="mb-1">
+                <PriceDisplay value={event.medianAccommodationPrice} large />
                 <span className="text-base font-light text-muted-foreground"> / night</span>
-              </span>
+              </div>
               <span className="text-xs text-muted-foreground font-light mt-2">
-                Median nightly rate across available stays in {event.location} for race weekend.
+                Estimated nightly rate across available stays in {event.location} for race weekend.
               </span>
             </div>
 
@@ -95,41 +101,45 @@ export default function EventDetail() {
                     Flights to {event.flightRegionLabel}
                   </span>
                 </div>
-                {/* Cheapest / Best tabs */}
-                <div className="flex border border-border overflow-hidden">
-                  <button
-                    onClick={() => setFlightTab("cheapest")}
-                    className={`flex items-center gap-1.5 px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors ${
-                      flightTab === "cheapest"
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-transparent text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    <TrendingDown size={12} />
-                    Cheapest
-                  </button>
-                  <button
-                    onClick={() => setFlightTab("best")}
-                    className={`flex items-center gap-1.5 px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors border-l border-border ${
-                      flightTab === "best"
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-transparent text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    <Star size={12} />
-                    Best
-                  </button>
-                </div>
+                {/* Cheapest / Best tabs — only for international races */}
+                {showTabs && (
+                  <div className="flex border border-border overflow-hidden">
+                    <button
+                      onClick={() => setFlightTab("cheapest")}
+                      className={`flex items-center gap-1.5 px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors ${
+                        flightTab === "cheapest"
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-transparent text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      <TrendingDown size={12} />
+                      Cheapest
+                    </button>
+                    <button
+                      onClick={() => setFlightTab("best")}
+                      className={`flex items-center gap-1.5 px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors border-l border-border ${
+                        flightTab === "best"
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-transparent text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      <Star size={12} />
+                      Best
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Tab description */}
               <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70 mb-5">
-                {flightTab === "cheapest"
-                  ? "Lowest one-way fare found from each capital city, by departure."
-                  : "Best-value fare — balanced for price, routing and convenience."}
+                {showTabs
+                  ? flightTab === "cheapest"
+                    ? "Lowest one-way fare found from each capital city, by departure."
+                    : "Best-value fare — balanced for price, routing and convenience."
+                  : "One-way fare from each capital city. Direct routes unless noted."}
               </p>
 
-              {/* Flight grid — each card links to a pre-filled Google Flights search */}
+              {/* Flight grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
                 {activeFlights.map((flight, i) => (
                   <a
@@ -149,14 +159,12 @@ export default function EventDetail() {
                         <span className="text-muted-foreground/60">({flight.code})</span>
                       </span>
                       {i === 0 && (
-                        flightTab === "cheapest"
-                          ? <TrendingDown size={12} className="text-primary shrink-0" />
-                          : <Star size={12} className="text-primary shrink-0" />
+                        showTabs && flightTab === "best"
+                          ? <Star size={12} className="text-primary shrink-0" />
+                          : <TrendingDown size={12} className="text-primary shrink-0" />
                       )}
                     </div>
-                    <span className={`text-2xl font-bold tracking-tighter ${i === 0 ? "text-primary" : ""}`}>
-                      ${formatAud(flight.price)}
-                    </span>
+                    <PriceDisplay value={flight.price} />
                     {flight.via && (
                       <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 mt-1">
                         {flight.via}
@@ -168,6 +176,11 @@ export default function EventDetail() {
                   </a>
                 ))}
               </div>
+
+              {/* Disclaimer */}
+              <p className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/40 mt-5 leading-relaxed">
+                Prices are indicative only, based on Lite/Economy fares excluding baggage and bikes, and subject to change. Please verify all costs directly with the provider before booking.
+              </p>
             </div>
           </div>
         </motion.div>

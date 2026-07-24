@@ -1,0 +1,73 @@
+My bad — here's the complete brief with everything included:
+
+---
+
+**GLOBAL CHANGES — ALL RACE PAGES**
+
+1. Only show the departure cities explicitly listed below for each race. Remove any city not listed for that specific race (this includes removing Canberra, Darwin, Hobart and any other city not specified below, on a per-race basis).
+
+2. Rename "Median Accommodation" to "Estimated Accommodation" on every page where it appears.
+
+3. Make the "AUD" currency label smaller/more subtle in the price display across all pages, since international visitors will be viewing this — it should be visible but not take up much visual space.
+
+4. Update the disclaimer text site-wide to: "Prices are indicative only, based on Lite/Economy fares excluding baggage and bikes, and subject to change. Please verify all costs directly with the provider before booking." Place this subtly, in small text, wherever the current disclaimer appears.
+
+5. For domestic-only races (Sunshine Coast Ironman, Ironman Australia, Ironman Western Australia), remove the "Best" price column entirely and only show one flight price per city, since these are direct routes with no meaningful best vs cheapest distinction.
+
+6. Currently when navigating to a new page, the page loads at whatever scroll position the previous page was left at, instead of starting at the top. Please add scroll-to-top behavior so that every time a user navigates to a new page anywhere on the site, the page automatically loads scrolled to the very top. This should apply across all pages and all navigation methods including clicking nav links, buttons and any in-page links.
+
+---
+
+**NICE 70.3 WORLDS**
+Only include: Sydney, Melbourne, Brisbane, Adelaide, Perth
+- Sydney: Best $1,700 / Cheapest $1,550
+- Melbourne: Best $1,700 / Cheapest $1,500
+- Adelaide: Best $1,900 / Cheapest $1,900
+- Perth: Best $1,800 / Cheapest $1,600
+- Brisbane: Best $1,900 / Cheapest $1,900
+
+---
+
+**SUNSHINE COAST IRONMAN**
+Only include: Sydney, Melbourne, Adelaide, Perth
+- Estimated Accommodation: $400/night
+- Sydney: $150
+- Melbourne: $200
+- Adelaide: $300
+- Perth: $500
+
+---
+
+**IRONMAN WORLD CHAMPIONSHIPS (KONA)**
+Only include: Brisbane, Sydney, Melbourne, Adelaide, Perth
+- Estimated Accommodation: $300/night
+- Brisbane: Best $1,400 / Cheapest $1,400
+- Sydney: Best $1,350 / Cheapest $1,250
+- Melbourne: Best $1,400 / Cheapest $1,400
+- Adelaide: Best $3,800 / Cheapest $2,000
+- Perth: Best $3,800 / Cheapest $3,800
+
+---
+
+**IRONMAN AUSTRALIA**
+Only include: Brisbane, Melbourne, Adelaide, Perth
+Update arrival airport reference to Sydney, not Port Macquarie
+- Estimated Accommodation: $200/night
+- Brisbane: $200
+- Melbourne: $150
+- Adelaide: $300
+- Perth: $500
+
+---
+
+**IRONMAN WESTERN AUSTRALIA**
+Only include: Adelaide, Melbourne, Sydney, Brisbane
+- Estimated Accommodation: $250/night
+- Adelaide: $370
+- Melbourne: $450
+- Sydney: $500
+- Brisbane: $500
+
+---
+
+All in one, ready for Replit.
